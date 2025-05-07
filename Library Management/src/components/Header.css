@@ -1,0 +1,21 @@
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: .5rem;
+    background-color: #f8f9fa;
+    color: black;
+    margin: 1rem;
+  }
+  
+  li {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  li:hover {
+    color: #007bff;
+  }
+  

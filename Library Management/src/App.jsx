@@ -1,8 +1,9 @@
-import BookList from './components/BookList'
-import Book from './components/Book'
+
 import { Books } from './utils/mockData'
 import './App.css'
 import { useState } from 'react'
+import Header from './components/Header'
+import { Outlet } from 'react-router-dom'
 
 
 function App() {
@@ -26,7 +27,8 @@ const [filteredBooks, setFilteredBooks] = useState(Books)
       <button onClick={handleSearch}>Search</button>
     </div>
     </div>
-    <BookList booksData = {filteredBooks}/>
+    <Header />
+    <Outlet />
     </>
   )
 }
