@@ -84,3 +84,18 @@ button:hover {
   font-size: 0.9rem;
   color: #555;
 }
+
+
+
+.book-list {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.book-list p {
+  text-align: center;
+  color: #666;
+}
+
