@@ -5,8 +5,10 @@ import App from './App.jsx'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import Error from './components/Error.jsx'
+import Demo from './components/Demo.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import BookList from './components/BookList.jsx'
+import BooksDetails from './components/BooksDetails.jsx'
 
 
 const appRouter = createBrowserRouter([
@@ -25,6 +27,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />
+      },
+      {
+        path: "/demo",
+        element: <Demo />
+      },
+      {
+        path: "/book/:id",
+        element: <BooksDetails />
       }
     ],
     errorElement: <Error />

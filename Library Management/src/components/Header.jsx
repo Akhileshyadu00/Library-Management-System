@@ -9,9 +9,9 @@ function Header() {
     <ul>
         <Link to="/"><li>Home</li></Link>
         <Link to="/about"><li>About</li></Link>
-        <Link to="/Contact"><li>Contact</li></Link>
-    </ul>
-      
+        <Link to="/contact"><li>Contact</li></Link>
+        <Link to="/demo"><li>Demo</li></Link>
+    </ul> 
     </>
   )
 }
