@@ -1,9 +1,16 @@
 import React from 'react'
 import "./Header.css"
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import userContext from '../utils/userContext'
 
 
 function Header() {
+
+  const data = useContext(userContext);
+  console.log(data);
+  
+
   return (
     <>
     <ul>

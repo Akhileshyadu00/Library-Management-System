@@ -1,45 +1,29 @@
 import Book from "./Book";
 import { Books } from "../utils/mockData";
 import "./Book.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../utils/useFetch";
+import userContext from "../utils/userContext";
 
 function BookList() {
   const [searchText, setSearchText] = useState('');
-  const [filteredBooks, setFilteredBooks] = useState(Books); // Default to all books
+  const [filteredBooks, setFilteredBooks] = useState(Books);
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [filteredBooks]);
-
-  const {data, error, loading} = useFetch(
-    "https://openlibrary.org/search.json?q=test"
-  );
+  const { setUserName } = useContext(userContext);
 
   useEffect(() => {
-    if(data) {
-      setFilteredBooks(data)
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    try {
+      const response = await fetch("https://openlibrary.org/search.json?q=test");
+      const json = await response.json();
+      console.log("API result", json);
+    } catch (error) {
+      console.error("Failed to fetch data", error);
     }
-  },[data])
-
-  if(error) {
-    return <p>Error in Loading: {error}</p>
   }
-  if(loading) {
-    return <p>Loading: {loading}</p>
-  }
-
-  // async function fetchData() {
-  //   try {
-  //     const response = await fetch("https://openlibrary.org/search.json?q=test");
-  //     const json = await response.json();
-  //     console.log("API result", json);
-     
-  //   } catch (error) {
-  //     console.error("Failed to fetch data", error);
-  //   }
-  // }
 
   const handleSearch = () => {
     const results = Books.filter(book =>
@@ -47,6 +31,38 @@ function BookList() {
     );
     setFilteredBooks(results);
   };
+
+  // const { data, error, loading } = useFetch(
+  //   "https://openlibrary.org/search.json?q=test"
+  // );
+
+  // useEffect(() => {
+  //   if (data && data.docs) {
+  //     const booksFromAPI = data.docs.map((doc, index) => ({
+  //       id: index,
+  //       title: doc.title,
+  //       author: doc.author_name ? doc.author_name[0] : 'Unknown Author',
+  //     }));
+  //     setFilteredBooks(booksFromAPI);
+  //   }
+  // }, [data]);
+
+  // if (error) return <p>Error in Loading: {error}</p>;
+  // if (loading) return <p>Loading...</p>;
+
+  // const handleSearch = () => {
+  //   const results = data.docs
+  //     .map((doc, index) => ({
+  //       id: index,
+  //       title: doc.title,
+  //       author: doc.author_name ? doc.author_name[0] : 'Unknown Author',
+  //     }))
+  //     .filter(book =>
+  //       book.title.toLowerCase().includes(searchText.toLowerCase())
+  //     );
+
+  //   setFilteredBooks(results);
+  // };
 
   return (
     <div className="container">
@@ -56,7 +72,10 @@ function BookList() {
           type="text"
           placeholder="Search by title..."
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setUserName(e.target.value); // optional: sync with context --- Create seperate input 
+          }}
         />
         <button onClick={handleSearch}>Search</button>
       </div>
