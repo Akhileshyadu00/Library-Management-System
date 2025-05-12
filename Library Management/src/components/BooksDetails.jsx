@@ -1,12 +1,24 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Books } from '../utils/mockData'
+import { useDispatch } from 'react-redux'
+import { addItem, removeItem } from '../utils/CartSlice'
 
 function BooksDetails() {
 
     const params = useParams()
     const book = Books.filter(book => book.id == params.id)
-    console.log(book);
+    //console.log(book);
+
+    const dispatch =  useDispatch()
+
+  function handleAdd(item) {
+    dispatch(addItem(item));
+  }
+
+  function handleRemove() {
+   dispatch(removeItem());
+  }
     
 
   return (
@@ -19,6 +31,8 @@ function BooksDetails() {
                 <h4>{book.description}</h4>
                 <img src={book.coverImageUrl} alt="" width="200px" />
                 <h3>{book.pageNo}</h3>
+                <button onClick={() => handleAdd(book)}>Add to Cart</button>
+                <button onClick={() => handleRemove(book)}>Remove from Cart</button>
             </>
         })
       }

@@ -1,9 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+
+const book1 = { id: 1, title: "Book One" };
+const book2 = { id: 2, title: "Book Two" };
+
+
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        items: []
+        items: [book1, book2]
     },
 
     reducers: {
